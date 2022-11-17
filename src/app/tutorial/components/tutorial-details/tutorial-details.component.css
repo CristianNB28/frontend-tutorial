@@ -1,0 +1,18 @@
+.edit-form {
+  max-width: 400px;
+  margin: auto;
+  margin-top: 25px;
+}
+
+.top-element {
+  margin-top: 25px;
+}
+
+.top-button {
+  margin-top: 20px;
+}
+
+.form-container {
+  display: flex;
+  flex-direction: column;
+}

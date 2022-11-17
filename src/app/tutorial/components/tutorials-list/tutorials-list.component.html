@@ -1,0 +1,56 @@
+<mat-card>
+  <mat-card-title>
+    Lista de Tutoriales
+  </mat-card-title>
+  <div class="form-container">
+    <mat-form-field>
+      <input
+        matInput
+        type="text"
+        class="form-control"
+        placeholder="Buscar por titulo"
+        [(ngModel)]="title"
+      >
+    </mat-form-field>
+  </div>
+  <mat-card-actions>
+    <button
+      mat-raised-button
+      color="primary"
+      (click)="searchTitle()"
+    >
+      Buscar
+    </button>
+  </mat-card-actions>
+</mat-card>
+
+
+<div class="list">
+  <mat-list>
+    <h4 mat-subheader>Lista de Tutoriales</h4>
+    <mat-list-item
+      *ngFor="let tutorial of tutorials; let i = index"
+      [class.active]="i == currentIndex"
+    >
+      <button
+        mat-icon-button
+        (click)="setActiveTutorial(tutorial, i)"
+      >
+        <mat-icon matListIcon>done</mat-icon>
+      </button>
+      <h3 mat-line>{{ tutorial.title }}</h3>
+    </mat-list-item>
+  </mat-list>
+  <button
+    mat-raised-button
+    color="accent"
+    (click)="removeAllTutorials()"
+  >
+    Eliminar Todo
+  </button>
+
+  <app-tutorial-details
+    [viewMode]="true"
+    [currentTutorial]="currentTutorial"
+  ></app-tutorial-details>
+</div>

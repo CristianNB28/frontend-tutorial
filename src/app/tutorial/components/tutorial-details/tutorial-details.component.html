@@ -1,0 +1,101 @@
+<div *ngIf="viewMode; else editable">
+  <div *ngIf="currentTutorial.id" class="top-element">
+    <h4>Tutorial</h4>
+    <div>
+      <label><strong>Title:</strong></label> {{ currentTutorial.title }}
+    </div>
+    <div>
+      <label><strong>Description:</strong></label>
+      {{ currentTutorial.description }}
+    </div>
+    <div>
+      <label><strong>Status:</strong></label>
+      {{ currentTutorial.published ? "Publicado" : "Pendiente" }}
+    </div>
+
+    <button
+      class="top-button"
+      mat-raised-button
+      color="warn"
+      routerLink="/tutorial/tutorials/{{ currentTutorial.id }}"
+    >
+      Editar
+    </button>
+  </div>
+
+  <div *ngIf="!currentTutorial">
+    <br />
+    <p>Por favor, haga clic en un Tutorial...</p>
+  </div>
+</div>
+
+<ng-template #editable>
+  <div *ngIf="currentTutorial.id" class="edit-form">
+    <mat-card>
+      <mat-card-title>
+        Editar Tutorial
+      </mat-card-title>
+      <div class="form-container">
+        <mat-form-field>
+          <input
+            matInput
+            name="title"
+            class="form-control"
+            placeholder="Titulo"
+            [(ngModel)]="currentTutorial.title"
+          >
+        </mat-form-field>
+        <mat-form-field>
+          <textarea
+            matInput
+            name="description"
+            class="form-control"
+            placeholder="Descripcion"
+            [(ngModel)]="currentTutorial.description"
+          ></textarea>
+        </mat-form-field>
+        <mat-radio-group [(ngModel)]="currentTutorial.published">
+          <mat-radio-button [value]="true">Publicado</mat-radio-button>
+          <mat-radio-button [value]="false">Pendiente</mat-radio-button>
+        </mat-radio-group>
+      </div>
+      <mat-card-actions>
+        <button
+          mat-raised-button
+          color="accent"
+          *ngIf="currentTutorial.published"
+          (click)="updatePublished(false)"
+        >
+          Ocultar
+        </button>
+        <button
+          mat-raised-button
+          color="warn"
+          *ngIf="!currentTutorial.published"
+          (click)="updatePublished(true)"
+        >
+          Publicar
+        </button>
+        <button
+          mat-raised-button
+          color="accent"
+          (click)="deleteTutorial()"
+        >
+          Eliminar
+        </button>
+        <button
+          mat-raised-button
+          color="primary"
+          (click)="updateTutorial()"
+        >
+          Update
+        </button>
+      </mat-card-actions>
+    </mat-card>
+    <p>{{ message }}</p>
+  </div>
+  <div *ngIf="!currentTutorial.id">
+    <br />
+    <p>No se puede acceder a este Tutorial...</p>
+  </div>
+</ng-template>

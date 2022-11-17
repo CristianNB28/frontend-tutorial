@@ -1,0 +1,54 @@
+<div class="submit-form">
+  <div *ngIf="!submitted">
+    <mat-card>
+      <mat-card-title>
+        Crear Tutorial
+      </mat-card-title>
+      <div class="form-container">
+        <mat-form-field>
+          <input
+            matInput
+            name="title"
+            class="form-control"
+            placeholder="Titulo"
+            [(ngModel)]="tutorial.title"
+            required
+          >
+        </mat-form-field>
+        <mat-form-field>
+          <textarea
+            matInput
+            name="description"
+            class="form-control"
+            placeholder="Descripcion"
+            [(ngModel)]="tutorial.description"
+            required
+          ></textarea>
+        </mat-form-field>
+        <mat-radio-group [(ngModel)]="tutorial.published">
+          <mat-radio-button [value]="true">Publicado</mat-radio-button>
+          <mat-radio-button [value]="false">Pendiente</mat-radio-button>
+        </mat-radio-group>
+      </div>
+      <mat-card-actions>
+        <button
+          mat-raised-button
+          color="primary"
+          (click)="saveTutorial()"
+        >
+          Submit
+        </button>
+      </mat-card-actions>
+    </mat-card>
+  </div>
+  <div *ngIf="submitted">
+    <h4>¡El tutorial se envió con éxito!</h4>
+    <button
+      mat-raised-button
+      color="primary"
+      (click)="newTutorial()"
+    >
+      Crear
+    </button>
+  </div>
+</div>
